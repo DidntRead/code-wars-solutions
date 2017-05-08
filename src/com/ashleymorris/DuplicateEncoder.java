@@ -9,29 +9,30 @@ public class DuplicateEncoder {
     static String encode(String word){
 
         String newWord = word.toLowerCase();
+        StringBuilder sbNewWord = new StringBuilder(newWord);
+
         HashMap<Character, Integer> count = new HashMap<>();
 
         for(char character : newWord.toCharArray()){
-            if (character != '(' || character != ')' || character != '[' || character != ']') {
                 if (!count.containsKey(character)) {
                     count.put(character, 1);
                 } else {
-                    int curentCount = count.get(character);
-                    curentCount++;
-                    count.put(character, curentCount);
+                    int currentCount = count.get(character);
+                    currentCount++;
+                    count.put(character, currentCount);
                 }
-            }
         }
 
-        for(char character : newWord.toCharArray()){
+        for(int i = 0; i < newWord.length(); i ++){
+            char character = newWord.charAt(i);
            if(count.containsKey(character)) {
                if (count.get(character) == 1) {
-                   newWord = newWord.replace(character, '(');
+                   sbNewWord.setCharAt(i, '(');
                } else {
-                   newWord = newWord.replace(character, ')');
+                   sbNewWord.setCharAt(i, ')');
                }
            }
         }
-        return newWord;
+        return sbNewWord.toString();
     }
 }
