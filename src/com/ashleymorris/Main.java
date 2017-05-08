@@ -1,10 +1,12 @@
 package com.ashleymorris;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-
-       System.out.println(DuplicateEncoder.encode("<[(((((](>"));
+        System.out.println(BinaryArrayToNumber.ConvertBinaryArrayToInt(new ArrayList<>(Arrays.asList(0, 0, 0, 1))));
+        System.out.println(DuplicateEncoder.encode("<[(((((](>"));
     }
 }
