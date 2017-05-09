@@ -1,6 +1,6 @@
 package com.ashleymorris;
 
-import java.util.HashMap;
+import java.util.HashMap;import java.util.Map;
 
 /**
  * Created by ashley.morris on 08/05/2017.
@@ -8,31 +8,27 @@ import java.util.HashMap;
 public class DuplicateEncoder {
     static String encode(String word){
 
-        String newWord = word.toLowerCase();
-        StringBuilder sbNewWord = new StringBuilder(newWord);
+        word = word.toLowerCase();
+        StringBuilder sbNewWord = new StringBuilder(word);
 
-        HashMap<Character, Integer> count = new HashMap<>();
+        Map<Character, Integer> count = new HashMap<>();
 
-        for(char character : newWord.toCharArray()){
+        for(int i = 0; i < word.length(); i ++){
+            char character = word.charAt(i);
                 if (!count.containsKey(character)) {
-                    count.put(character, 1);
-                } else {
-                    int currentCount = count.get(character);
-                    currentCount++;
-                    count.put(character, currentCount);
+                    sbNewWord.setCharAt(i, '(');
+                    count.put(character, i);
+                } else if (count.get(character) >= 0) {
+                    int index = count.get(character);
+                    sbNewWord.setCharAt(i, ')');
+                    sbNewWord.replace(index, index + 1, ")");
+                    count.put(character, -1);
+                }
+                else{
+                    sbNewWord.setCharAt(i, ')');
                 }
         }
 
-        for(int i = 0; i < newWord.length(); i ++){
-            char character = newWord.charAt(i);
-           if(count.containsKey(character)) {
-               if (count.get(character) == 1) {
-                   sbNewWord.setCharAt(i, '(');
-               } else {
-                   sbNewWord.setCharAt(i, ')');
-               }
-           }
-        }
         return sbNewWord.toString();
     }
 }
