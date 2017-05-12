@@ -9,11 +9,15 @@ public class BasicEncrypt {
 
         StringBuilder newWord = new StringBuilder(text);
 
-        if(rule >  0){
-            for(int i = 0; i < text.length(); i++){
-                char newChar = (char) (text.charAt(i) + rule);
-                newWord.setCharAt(i, newChar);
+        for(int i = 0; i < text.length(); i++){
+           char c = text.charAt(i);
+           int ascii = c + rule;
+
+           if (ascii > 255){
+                ascii = ascii % 256;
             }
+
+            newWord.setCharAt(i, (char) ascii);
         }
 
         return newWord.toString();
