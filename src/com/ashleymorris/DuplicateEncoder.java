@@ -4,6 +4,9 @@ import java.util.HashMap;import java.util.Map;
 
 /**
  * Created by ashley.morris on 08/05/2017.
+ *
+ * if the character is in the word once, replace with (
+ * else replace all instances of it with )
  */
 public class DuplicateEncoder {
     static String encode(String word){

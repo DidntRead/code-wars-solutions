@@ -11,13 +11,13 @@ public class BasicEncrypt {
 
         for(int i = 0; i < text.length(); i++){
            char c = text.charAt(i);
-           int ascii = c + rule;
+           int ascii = c + rule; //get the ascii value of char plus rule
 
-           if (ascii > 255){
+           if (ascii > 255){ // if greater than 255 modulus value into 256
                 ascii = ascii % 256;
             }
 
-            newWord.setCharAt(i, (char) ascii);
+            newWord.setCharAt(i, (char) ascii); //Cast this value back to char
         }
 
         return newWord.toString();
