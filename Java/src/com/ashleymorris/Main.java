@@ -2,6 +2,7 @@ package com.ashleymorris;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,8 +24,12 @@ public class Main {
                 "You u youville utube you youyouyou uuu raiyou united youuuu u you"
         };
 
-        for (int i = 0; i < inputs.length; i++) {
-            System.out.println(AutoCorrect.autocorrect(inputs[i]));
+        for (String input : inputs) {
+            System.out.println(AutoCorrect.autocorrect(input));
         }
+
+        List<String> a = new ArrayList<String>();
+        a.add(":))("); a.add("XD"); a.add(":0}"); a.add("x:-"); a.add("):-"); a.add("D:");a.add(":~D");
+        System.out.println(SmileFaces.countSmileys(a));
     }
 }

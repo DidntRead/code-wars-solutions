@@ -13,6 +13,7 @@ function isDivisibleBy6(s) {
     return res;
 }
 
+//Pisano period https://en.wikipedia.org/wiki/Pisano_period
 function isDivisibleBy(s, d) {
     let remainder = 0;
 
