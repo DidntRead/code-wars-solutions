@@ -16,7 +16,7 @@ public class MoveToFront {
         this.lookupTable = lookupTable;
     }
 
-    public String encode(String message){
+    public List <Integer> encode(String message){
 
         List <Integer> result = new LinkedList<>();
         StringBuilder output = new StringBuilder(lookupTable);
@@ -35,9 +35,13 @@ public class MoveToFront {
             //Move to the front - aha :D
             output.deleteCharAt(index).reverse().append(String.valueOf(c)).reverse();
         }
-
-        return result.toString();
+        return result;
     }
 
+    public String decode(List<Integer> encodedMessage){
 
+
+        return "";
+    }
+    
 }
