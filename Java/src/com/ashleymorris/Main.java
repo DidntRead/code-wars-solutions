@@ -2,13 +2,16 @@ package com.ashleymorris;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
+        List<Integer> encodedMessage;
+        String decodedMessage;
 
-        MoveToFront moveToFront = new MoveToFront("abcdefghijklmnopqrstuvwxyz ");
+        MoveToFront moveToFront = new MoveToFront("abcdefghijklmnopqrstuvwxyz");
         BasicEncrypt basicEncrypt = new BasicEncrypt();
 
         System.out.println(BinaryArrayToNumber.ConvertBinaryArrayToInt(new ArrayList<>(Arrays.asList(1, 0, 0, 1))));
@@ -38,7 +41,11 @@ public class Main {
 
         System.out.println(ThreeAndFives.solution(10));
 
-        System.out.println(moveToFront.encode("a monkey that likes to eat eat eat lemon and other small mammals and cheddar cheese"));
+        encodedMessage = moveToFront.encode("bananaaa");
+        System.out.println(encodedMessage);
 
+
+        decodedMessage = moveToFront.decode(encodedMessage);
+        System.out.println(decodedMessage);
     }
 }
