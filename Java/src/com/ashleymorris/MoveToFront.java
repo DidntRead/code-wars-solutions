@@ -27,9 +27,9 @@ public class MoveToFront {
 
             //Value isn't in the lookup
             if (index == -1) {
-                throw new IllegalArgumentException("Value not found in the lookup table");
+                throw new IllegalArgumentException("Value \""+c+"\" not found in the lookup table.");
             }
-            
+
             result.add(index);
 
             //Move to the front - aha :D

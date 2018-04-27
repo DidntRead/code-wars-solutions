@@ -11,7 +11,7 @@ public class Main {
         List<Integer> encodedMessage;
         String decodedMessage;
 
-        MoveToFront moveToFront = new MoveToFront("abcdefghijklmnopqrstuvwxyz");
+        MoveToFront moveToFront = new MoveToFront("abcdefghijklmnopqrstuvwxyz,! I");
         BasicEncrypt basicEncrypt = new BasicEncrypt();
 
         System.out.println(BinaryArrayToNumber.ConvertBinaryArrayToInt(new ArrayList<>(Arrays.asList(1, 0, 0, 1))));
@@ -41,7 +41,7 @@ public class Main {
 
         System.out.println(ThreeAndFives.solution(10));
 
-        encodedMessage = moveToFront.encode("bananaaa");
+        encodedMessage = moveToFront.encode("so lets write a really long sentence and then see how it turns out, I might have to put spaces in to the new lookup though!");
         System.out.println(encodedMessage);
 
 
