@@ -41,8 +41,14 @@ test('alphabetWars', function (t) {
             "*",
             "*" ];
 
-    //t.equals(levelSix.alphabetWar(reinforces, airstrikes), 'codewarsxxxx','Top 50 massacre failure');
+    t.equals(levelSix.alphabetWar(reinforces, airstrikes), 'codewarsxxxx','Top 50 massacre failure');
     t.equals(levelSix.alphabetWar(["abcdefg","hijklmn"], ["   *   ", "*  *   "]),'hi___fg');
-    //t.equals(levelSix.alphabetWar(["aaaaa","bbbbb", "ccccc", "ddddd"],  ["*", " *", "   "]),'ccbaa');
+    t.equals(levelSix.alphabetWar(["aaaaa","bbbbb", "ccccc", "ddddd"],  ["*", " *", "   "]),'ccbaa');
     t.end();
+});
+
+
+test('deleteNth', function (t) {
+   t.equal(levelSix.deleteNth([20,37,20,21], 1).toString(), [20,37,21].toString(), "passes");
+   t.end();
 });
