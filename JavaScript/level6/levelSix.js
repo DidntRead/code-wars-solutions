@@ -74,6 +74,8 @@ LevelSix.prototype.deleteNth = function (arr,n){
     return arr.filter(x => x !== null)
 };
 
+
+
 //Best deleteNth solution on codewars
 //LevelSix.prototype.deleteNth = function(arr,x) {
 //    var cache = {};
