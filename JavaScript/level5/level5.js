@@ -9,8 +9,6 @@ function LevelFive() {
 }
 
 LevelFive.prototype.Soundex = function (name) {
-
-
     let replace = function (i) {
         switch (i) {
             case "b":
@@ -38,22 +36,29 @@ LevelFive.prototype.Soundex = function (name) {
     let soundex = function (name) {
 
         let names = name.split(" ");
+
         return names.map(name => {
 
-            let first = name.charAt(0);
+            let first = name.charAt(0).toUpperCase();
 
-            name = name.substr(1, name.length)
-                .replace(/[aeiouyhw]/gi, "-")
-                .replace(/[^aeiouyhw]/gi, (i) => {
+            name = name
+                .replace(/(?!^[h|w])[hw]/gi, "-")
+                .replace(/[^aeiouy]/gi, (i) => {
                     return replace(i);
                 })
                 .split("")
                 .filter(function (item, pos, self) {
                     return self[pos + 1] !== item;
                 })
-                .join("");
+                .join("")
+                .replace(/(?!^[aeiouy])[aeiouy]/gi, (i) => {
+                    i = "-";
+                    return replace(i);
+                });
 
-            while(name.length < 3){
+            name = name.substring(1, 4);
+
+            while (name.length < 3) {
                 name += "0"
             }
 
@@ -63,15 +68,24 @@ LevelFive.prototype.Soundex = function (name) {
     }
 };
 
+//add two integers without + or -
+LevelFive.prototype.add = function (x, y) {
 
-//Best deleteNth solution on codewars
-//LevelSix.prototype.deleteNth = function(arr,x) {
-//    var cache = {};
-//    return arr.filter(function(n) {
-//        console.log(cache);
-//        cache[n] = (cache[n]||0) + 1;
-//        return cache[n] <= x;
-//    });
-//};
+    if (x === 0) return y;
+    if (y === 0 ) return x;
+
+    //bitwise or is enough for some operations
+    //e.g. 8 + 5 but 9 + 5 will do 7 + 5 with
+    //2 remaining so the remainder needs to be added
+    while (y !== 0){
+
+        //use bitwise and to get remainder
+        let remain = x & y;
+        x = x ^ y;
+        y = remain << 1; // bit shift the remainder
+    }
+
+    return x;
+};
 
 module.exports = LevelFive;
