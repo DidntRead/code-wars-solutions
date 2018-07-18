@@ -24,7 +24,7 @@ LevelSix.prototype.alphabetWar = function (reinforces, airstrikes) {
             m => '.'.repeat(m.length));
 
 
-        for (let i = 0; i < len && i < strike.length; i++){
+        for (let i = 0; i < len && i < strike.length; i++) {
             if (strike[i] === '.') {
                 counts[i]++;
             }
@@ -38,19 +38,19 @@ LevelSix.prototype.alphabetWar = function (reinforces, airstrikes) {
 };
 
 
-function count(arr, value){
+function count(arr, value) {
     //create a new array where x == value to find
     //return the length for the count
-    return arr.filter( x => x === value).length;
+    return arr.filter(x => x === value).length;
 }
 
-function getNthIndex(arr, val, count){
+function getNthIndex(arr, val, count) {
     //finds all indexs of the value in the original array,
     //then returns only the elements that are greater than the count
     let idx = arr.indexOf(val);
     let indices = [];
 
-    while (idx !== -1){
+    while (idx !== -1) {
         indices.push(idx);
         idx = arr.indexOf(val, idx + 1)
     }
@@ -59,12 +59,12 @@ function getNthIndex(arr, val, count){
 }
 
 
-LevelSix.prototype.deleteNth = function (arr,n){
+LevelSix.prototype.deleteNth = function (arr, n) {
 
     arr.forEach((element) => {
 
         let c = count(arr, element);
-        if (c > n){
+        if (c > n) {
             getNthIndex(arr, element, n).forEach((i) => {
                 arr[i] = null;
             });
@@ -73,7 +73,6 @@ LevelSix.prototype.deleteNth = function (arr,n){
 
     return arr.filter(x => x !== null)
 };
-
 
 
 //Best deleteNth solution on codewars
