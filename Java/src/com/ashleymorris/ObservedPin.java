@@ -14,7 +14,6 @@ class ObservedPin {
     static List<String> getPINs(String observed) {
 
         List<String> pins = new ArrayList<>();
-        pins.add(observed);
 
         HashMap<String, String[]> keyPad = new HashMap<>();
         keyPad.put("1", new String[]{"1", "2", "4"});
@@ -28,35 +27,43 @@ class ObservedPin {
         keyPad.put("9", new String[]{"6", "8", "9"});
         keyPad.put("0", new String[]{"0", "8"});
 
-
         char[] characters = observed.toCharArray();
+
+        StringBuilder pinBuilder = new StringBuilder(observed);
+
 
         for (int i = 0; i < characters.length; i++) {
 
-            char currentCharacter = characters[i];
-
-            String[] possibleValues = keyPad.get(String.valueOf(currentCharacter)); //get all possible alternative values for current character
-
-            StringBuilder pinBuilder = new StringBuilder(observed);
 
 
-            for (String value : possibleValues) {
+            String[] possibleValues = keyPad.get(String.valueOf(characters[i]));
 
-                String newPin;
+            for (String value1 : possibleValues) {
 
+//                pinBuilder.setCharAt(i, value1.charAt(0));
+                int p = i;
+                int currentVal = i;
 
-                pinBuilder.setCharAt(i, value.charAt(0));
-                newPin = pinBuilder.toString();
+                while (p != characters.length) {
 
-                if (pins.indexOf(newPin) == -1) {
-                    pins.add(newPin);
+                    String [] values = keyPad.get(String.valueOf(characters[p]));
+
+                    pinBuilder.setCharAt(p, values[currentVal].charAt(0));
+
+                    if(p == characters.length -1) {
+                        System.out.println(pinBuilder.toString());
+                        pins.add(pinBuilder.toString());
+                        p--;
+                        currentVal++;
+                    }
+
+                    p++;
                 }
 
             }
 
+
         }
-
-
         return pins;
     }
 
