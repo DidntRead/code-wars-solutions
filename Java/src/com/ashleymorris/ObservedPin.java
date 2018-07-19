@@ -27,43 +27,59 @@ class ObservedPin {
         keyPad.put("9", new String[]{"6", "8", "9"});
         keyPad.put("0", new String[]{"0", "8"});
 
-        char[] characters = observed.toCharArray();
+        char[] observedPin = observed.toCharArray();
 
         StringBuilder pinBuilder = new StringBuilder(observed);
 
 
-        for (int i = 0; i < characters.length; i++) {
+        for (int i = 0; i <= observedPin.length; i++) {
 
-
-
-            String[] possibleValues = keyPad.get(String.valueOf(characters[i]));
+            String[] possibleValues = keyPad.get(String.valueOf(observedPin[i]));
 
             for (String value1 : possibleValues) {
 
-//                pinBuilder.setCharAt(i, value1.charAt(0));
+                System.out.println(value1);
+
                 int p = i;
-                int currentVal = i;
+                int currentVal = 0;
 
-                while (p != characters.length) {
+                while (p != observedPin.length) {
 
-                    String [] values = keyPad.get(String.valueOf(characters[p]));
+                    String[] values = keyPad.get(String.valueOf(observedPin[p]));
 
-                    pinBuilder.setCharAt(p, values[currentVal].charAt(0));
+                    if (currentVal <= values.length) {
 
-                    if(p == characters.length -1) {
-                        System.out.println(pinBuilder.toString());
-                        pins.add(pinBuilder.toString());
-                        p--;
-                        currentVal++;
+                        if (p == observedPin.length - 1) {
+
+                            for (String val : values) {
+                                pinBuilder.setCharAt(p, val.charAt(0));
+                                pins.add(pinBuilder.toString());
+                            }
+
+                            p = i;
+                            currentVal++;
+
+
+                        } else {
+                            if(currentVal < values.length) {
+                                pinBuilder.setCharAt(p, values[currentVal].charAt(0));
+                            }
+                        }
+
                     }
+
 
                     p++;
                 }
 
+                pinBuilder.setCharAt(i, value1.charAt(0));
+
+                System.out.println(pinBuilder.toString());
             }
 
-
         }
+
+
         return pins;
     }
 
