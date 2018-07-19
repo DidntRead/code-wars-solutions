@@ -34,7 +34,7 @@ class ObservedPin {
 
         for (int i = 0; i <= observedPin.length; i++) {
 
-            String[] possibleValues = keyPad.get(String.valueOf(observedPin[i]));
+            String[] possibleValues = keyPad.get(String.valueOf(observedPin[0]));
 
             for (String value1 : possibleValues) {
 
@@ -42,6 +42,8 @@ class ObservedPin {
 
                 int p = i;
                 int currentVal = 0;
+
+                pinBuilder.setCharAt(i, value1.charAt(0));
 
                 while (p != observedPin.length) {
 
@@ -54,6 +56,9 @@ class ObservedPin {
                             for (String val : values) {
                                 pinBuilder.setCharAt(p, val.charAt(0));
                                 pins.add(pinBuilder.toString());
+
+                                System.out.println(pinBuilder.toString());
+
                             }
 
                             p = i;
@@ -72,13 +77,12 @@ class ObservedPin {
                     p++;
                 }
 
-                pinBuilder.setCharAt(i, value1.charAt(0));
+//                pinBuilder.setCharAt(i, value1.charAt(0));
+                System.out.println("we are here");
 
-                System.out.println(pinBuilder.toString());
             }
 
         }
-
 
         return pins;
     }
