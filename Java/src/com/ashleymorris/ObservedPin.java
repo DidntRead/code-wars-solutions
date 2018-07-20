@@ -64,21 +64,24 @@ class ObservedPin {
                                 }
 
                             }
-                        }
-                        else {
+                        } else {
                             currentPermutation[currentDigit] = 0;
                             currentDigit = currentDigit - 1;
                         }
 
 
                     } else {
-                        pinBuilder.setCharAt(currentDigit, values[currentPermutation[currentDigit]].charAt(0));
-                        currentPermutation[currentDigit]++;
-                        currentDigit++;
-//                            if (currentPermutation[currentDigit] <= values.length) {
-//
-//                                currentDigit++;
-//                            }
+                        if (currentPermutation[currentDigit] < values.length) {
+                            pinBuilder.setCharAt(currentDigit, values[currentPermutation[currentDigit]].charAt(0));
+                            currentPermutation[currentDigit]++;
+                            currentDigit++;
+                        }
+                        else {
+                            System.out.println("here");
+                            currentPermutation[currentDigit] = 0;
+                            currentDigit = currentDigit - 1;
+                        }
+
                     }
 
 
