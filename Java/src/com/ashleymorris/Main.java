@@ -49,7 +49,7 @@ public class Main {
 //        System.out.println(decodedMessage);
 
 //    System.out.println(ObservedPin.getPINs("1357"));
-     System.out.println(ObservedPin.getPINs("11"));
+     System.out.println(ObservedPin.getPINs("1194678"));
 
 //        System.out.println(ObservedPin.getPINs("369"));
     }

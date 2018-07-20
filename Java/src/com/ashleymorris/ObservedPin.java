@@ -16,20 +16,20 @@ class ObservedPin {
 
         char[] observedPin = observed.toCharArray();
 
-        HashMap<String, String[]> keyPad = new HashMap<>();
-        keyPad.put("1", new String[]{"1", "2", "4"});
-        keyPad.put("2", new String[]{"1", "2", "3", "5"});
-        keyPad.put("3", new String[]{"2", "3", "6"});
-        keyPad.put("4", new String[]{"1", "4", "5", "7"});
-        keyPad.put("5", new String[]{"2", "4", "5", "6", "8"});
-        keyPad.put("6", new String[]{"3", "5", "6", "9"});
-        keyPad.put("7", new String[]{"4", "7", "8"});
-        keyPad.put("8", new String[]{"5", "7", "8", "9", "0"});
-        keyPad.put("9", new String[]{"6", "8", "9"});
-        keyPad.put("0", new String[]{"0", "8"});
+        HashMap<String, String[]> adjacents = new HashMap<>();
+        adjacents.put("1", new String[]{"1", "2", "4"});
+        adjacents.put("2", new String[]{"1", "2", "3", "5"});
+        adjacents.put("3", new String[]{"2", "3", "6"});
+        adjacents.put("4", new String[]{"1", "4", "5", "7"});
+        adjacents.put("5", new String[]{"2", "4", "5", "6", "8"});
+        adjacents.put("6", new String[]{"3", "5", "6", "9"});
+        adjacents.put("7", new String[]{"4", "7", "8"});
+        adjacents.put("8", new String[]{"5", "7", "8", "9", "0"});
+        adjacents.put("9", new String[]{"6", "8", "9"});
+        adjacents.put("0", new String[]{"0", "8"});
 
         StringBuilder pinBuilder = new StringBuilder(observed);
-        String[] possibleValues = keyPad.get(String.valueOf(observedPin[0]));
+        String[] possibleValues = adjacents.get(String.valueOf(observedPin[0]));
 
         for (String value : possibleValues) {
 
@@ -41,10 +41,10 @@ class ObservedPin {
 
             if (observedPin.length > 1) {
 
-                while (currentDigit != observedPin.length) {
+                while (currentDigit != observedPin.length && currentDigit > 0) {
 
                     //Get all the possible alternative values for the current digit in the pin
-                    String[] values = keyPad.get(String.valueOf(observedPin[currentDigit]));
+                    String[] values = adjacents.get(String.valueOf(observedPin[currentDigit]));
 
                     if (currentDigit == observedPin.length - 1) {
 
@@ -59,7 +59,6 @@ class ObservedPin {
                                 }
 
                                 if (pins.indexOf(pinBuilder.toString()) == -1) {
-                                    System.out.println("adding " + pinBuilder.toString());
                                     pins.add(pinBuilder.toString());
                                 }
 
@@ -71,20 +70,17 @@ class ObservedPin {
 
 
                     } else {
+
                         if (currentPermutation[currentDigit] < values.length) {
                             pinBuilder.setCharAt(currentDigit, values[currentPermutation[currentDigit]].charAt(0));
                             currentPermutation[currentDigit]++;
                             currentDigit++;
                         }
                         else {
-                            System.out.println("here");
                             currentPermutation[currentDigit] = 0;
                             currentDigit = currentDigit - 1;
                         }
-
                     }
-
-
                 }
             }
 
@@ -93,6 +89,7 @@ class ObservedPin {
             }
         }
 
+        System.out.println("there are :" + pins.size()+  " possible pins");
         return pins;
 
     }
