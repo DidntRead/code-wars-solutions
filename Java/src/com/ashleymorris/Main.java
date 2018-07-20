@@ -48,8 +48,9 @@ public class Main {
 //        decodedMessage = moveToFront.decode(encodedMessage);
 //        System.out.println(decodedMessage);
 
-//    System.out.println(ObservedPin.getPINs("8"));
-//        System.out.println(ObservedPin.getPINs("11"));
-        System.out.println(ObservedPin.getPINs("369"));
+    System.out.println(ObservedPin.getPINs("1357"));
+//     System.out.println(ObservedPin.getPINs("11"));
+
+//        System.out.println(ObservedPin.getPINs("369"));
     }
 }

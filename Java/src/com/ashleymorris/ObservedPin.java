@@ -10,10 +10,11 @@ import java.util.List;
 
 class ObservedPin {
 
-
     static List<String> getPINs(String observed) {
 
         List<String> pins = new ArrayList<>();
+
+        char[] observedPin = observed.toCharArray();
 
         HashMap<String, String[]> keyPad = new HashMap<>();
         keyPad.put("1", new String[]{"1", "2", "4"});
@@ -27,59 +28,70 @@ class ObservedPin {
         keyPad.put("9", new String[]{"6", "8", "9"});
         keyPad.put("0", new String[]{"0", "8"});
 
-        char[] observedPin = observed.toCharArray();
-
         StringBuilder pinBuilder = new StringBuilder(observed);
+        String[] possibleValues = keyPad.get(String.valueOf(observedPin[0]));
 
+        for (String value : possibleValues) {
 
-            String[] possibleValues = keyPad.get(String.valueOf(observedPin[0]));
+            //This outer loop is to set the first value
+            pinBuilder.setCharAt(0, value.charAt(0));
 
-            for (String value1 : possibleValues) {
+            int currentDigit = 1; //Start from the first digit after the first
+            int[] currentPermutation = new int[observedPin.length]; //Current value array keeps track of how many potential permutations for a given number
 
-                System.out.println(value1);
-                pinBuilder.setCharAt(0, value1.charAt(0));
+            if (observedPin.length > 1) {
 
-                int p = 1;
-                int currentVal = 0;
+                while (currentDigit != observedPin.length) {
 
-                while (p != observedPin.length) {
+                    //Get all the possible alternative values for the current digit in the pin
+                    String[] values = keyPad.get(String.valueOf(observedPin[currentDigit]));
 
-                    String[] values = keyPad.get(String.valueOf(observedPin[p]));
+                    if (currentDigit == observedPin.length - 1) {
 
-                    if (currentVal <= values.length) {
-
-                        if (p == observedPin.length - 1) {
+                        if (currentPermutation[currentDigit] < values.length) {
 
                             for (String val : values) {
-                                pinBuilder.setCharAt(p, val.charAt(0));
-                                pins.add(pinBuilder.toString());
 
-                                System.out.println(pinBuilder.toString());
+                                pinBuilder.setCharAt(currentDigit, val.charAt(0));
 
-                            }
+                                if (currentPermutation[currentDigit] < values.length) {
+                                    currentPermutation[currentDigit]++;
+                                }
 
-                            p = 0;
-                            currentVal++;
+                                if (pins.indexOf(pinBuilder.toString()) == -1) {
+                                    System.out.println("adding " + pinBuilder.toString());
+                                    pins.add(pinBuilder.toString());
+                                }
 
-
-                        } else {
-                            if(currentVal < values.length) {
-                                pinBuilder.setCharAt(p, values[currentVal].charAt(0));
                             }
                         }
+                        else {
+                            currentPermutation[currentDigit] = 0;
+                            currentDigit = currentDigit - 1;
+                        }
 
+
+                    } else {
+                        pinBuilder.setCharAt(currentDigit, values[currentPermutation[currentDigit]].charAt(0));
+                        currentPermutation[currentDigit]++;
+                        currentDigit++;
+//                            if (currentPermutation[currentDigit] <= values.length) {
+//
+//                                currentDigit++;
+//                            }
                     }
 
-                    p++;
+
                 }
-
-                System.out.println("we are here");
-
             }
 
-
+            if (pins.indexOf(pinBuilder.toString()) == -1) {
+                pins.add(pinBuilder.toString());
+            }
+        }
 
         return pins;
+
     }
 
 } // ObservedPin
