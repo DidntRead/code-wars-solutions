@@ -48,9 +48,14 @@ public class Main {
 //        decodedMessage = moveToFront.decode(encodedMessage);
 //        System.out.println(decodedMessage);
 
-//    System.out.println(ObservedPin.getPINs("1357"));
-     System.out.println(ObservedPin.getPINs("1194678"));
-
+//        System.out.println(ObservedPin.getPINs("5858"));
+//        System.out.println(ObservedPin.getPINs("11"));
 //        System.out.println(ObservedPin.getPINs("369"));
+
+        System.out.println(Scramblies.scramble("katas","steak"));
+        System.out.println(Scramblies.scramble("rkqodlw","world"));
+        System.out.println(Scramblies.scramble("cedewaraaossoqqyt","codewars"));
+        System.out.println(Scramblies.scramble("scriptjavx","javascript"));
+
     }
 }

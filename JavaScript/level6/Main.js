@@ -4,6 +4,7 @@
 
 const bySix = require("./isDivisibleBy6");
 const toCamel = require("./levelSix");
+const furthestDistance = require("furthestDistance");
 
 console.log(bySix.isDivisibleBy6("1234567890123456789012345678*0"));
 console.log(toCamel.toCamelCase("the-stealth-warrior"));

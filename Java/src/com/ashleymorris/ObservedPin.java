@@ -12,10 +12,6 @@ class ObservedPin {
 
     static List<String> getPINs(String observed) {
 
-        List<String> pins = new ArrayList<>();
-
-        char[] observedPin = observed.toCharArray();
-
         HashMap<String, String[]> adjacents = new HashMap<>();
         adjacents.put("1", new String[]{"1", "2", "4"});
         adjacents.put("2", new String[]{"1", "2", "3", "5"});
@@ -29,18 +25,24 @@ class ObservedPin {
         adjacents.put("0", new String[]{"0", "8"});
 
         StringBuilder pinBuilder = new StringBuilder(observed);
-        String[] possibleValues = adjacents.get(String.valueOf(observedPin[0]));
 
-        for (String value : possibleValues) {
+        char[] observedPin = observed.toCharArray();
+
+        String[] firstPositionValues = adjacents.get(String.valueOf(observedPin[0]));
+
+        List<String> pins = new ArrayList<>();
+
+        for (String value : firstPositionValues) {
 
             //This outer loop is to set the first value
             pinBuilder.setCharAt(0, value.charAt(0));
 
             int currentDigit = 1; //Start from the first digit after the first
-            int[] currentPermutation = new int[observedPin.length]; //Current value array keeps track of how many potential permutations for a given number
+            int[] currentPermutation = new int[observedPin.length]; //Keeps track of how many potential permutations for a given number
 
             if (observedPin.length > 1) {
 
+                //Loop through the rest of the pin checking each possible permutation
                 while (currentDigit != observedPin.length && currentDigit > 0) {
 
                     //Get all the possible alternative values for the current digit in the pin
@@ -48,6 +50,7 @@ class ObservedPin {
 
                     if (currentDigit == observedPin.length - 1) {
 
+                        //if the current permutation is less than the possible values
                         if (currentPermutation[currentDigit] < values.length) {
 
                             for (String val : values) {
@@ -58,6 +61,7 @@ class ObservedPin {
                                     currentPermutation[currentDigit]++;
                                 }
 
+                                //Don't add duplicates
                                 if (pins.indexOf(pinBuilder.toString()) == -1) {
                                     pins.add(pinBuilder.toString());
                                 }
@@ -89,9 +93,7 @@ class ObservedPin {
             }
         }
 
-        System.out.println("there are :" + pins.size()+  " possible pins");
+        System.out.println("There are : " + pins.size()+  " possible pins");
         return pins;
-
     }
-
-} // ObservedPin
+}
