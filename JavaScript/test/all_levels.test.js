@@ -78,6 +78,6 @@ test('Sudoku', function(t) {
         [2,8,7,4,1,9,6,3,5],
         [3,4,5,2,8,6,1,7,9]];
 
-    t.equal(levelThree.sudoku(puzzle), solution, "puzzle solved");
+    t.equal(levelThree.sudoku(puzzle).toString(), solution.toString(), "puzzle solved");
     t.end();
 });
