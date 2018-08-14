@@ -3,16 +3,20 @@
  */
 
 
-function Sudoku() { }
+function Sudoku(table) {
+    this.table = table;
+}
 
 /**
  * Uses a simple console.log to print the current state of the puzzle
  * @param puzzle
  */
-let printGrid = function (puzzle) {
-
-    console.log(puzzle);
-
+Sudoku.prototype.outPutToTable = function (row, col, num) {
+    if (this.table) {
+        let cell = "cell" + row + col;
+        let tableCells = this.table.rows[row].cells.namedItem(cell);
+        tableCells.innerText = num;
+    }
 };
 
 /**
@@ -111,6 +115,7 @@ Sudoku.prototype.solve = function (puzzle) {
         if (isSafe(puzzle, row, col, num)) {
 
             puzzle[row][col] = num;
+            this.outPutToTable(row, col, num);
 
             //Do the same thing again recursively
             if (this.solve(puzzle)) {
@@ -118,14 +123,29 @@ Sudoku.prototype.solve = function (puzzle) {
             }
 
             puzzle[row][col] = 0;
-
+            this.outPutToTable(row, col, 0);
         }
+
     }
 
     return false;
 };
 
+Sudoku.prototype.getDefaultTable = function () {
+    return [
+        [5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9]];
+};
+
 try {
-    module.exports =  Sudoku;
-} catch (e) {}
+    module.exports = Sudoku;
+} catch (e) {
+}
 

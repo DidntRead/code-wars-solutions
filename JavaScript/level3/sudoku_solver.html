@@ -8,6 +8,7 @@
         .sudoku-section-one {
             background: #ccc;
         }
+
         .sudoku-section-two {
             background: #ffffff;
         }
@@ -16,10 +17,10 @@
     <script type="text/javascript">
 
         let table;
-        let solver = new Sudoku();
+        let solver;
 
         function tableCreate() {
-            let body = document.body;
+            let container = document.getElementById("sudoku_container");
             let table = document.createElement('table');
 
             table.style.width = '200px';
@@ -45,20 +46,25 @@
                             td.classList.add('sudoku-section-two');
                         }
 
-                        td.addEventListener("click", () => {
+                        td.addEventListener("mousedown", (event) => {
+                            event.preventDefault();
                             let current = td.innerText;
-                            if (current < 9) {
-                                current++;
+                            if (event.button === 0) {
+                                (current < 9) ? current++ : current = 0;
                             }
-                            else {
-                                current = 0;
+                            else if (event.button === 2) {
+                                (current > 0) ? current-- : current = 9;
                             }
                             td.innerText = current;
+                        });
+
+                        td.addEventListener("contextmenu", (event) => {
+                            event.preventDefault();
                         });
                     }
                 }
             }
-            body.appendChild(table);
+            container.appendChild(table);
             return table;
         }
 
@@ -69,7 +75,7 @@
                 let cells = table.rows.item(i).cells;
                 for (var j = 0; j < 9; j++) {
                     let cellVal = cells.item(j).innerHTML;
-                    row.push(cellVal);
+                    row.push(parseInt(cellVal));
                 }
                 puzzle.push(row);
             }
@@ -78,21 +84,20 @@
 
         function solvePuzzle() {
             let puzzle = getPuzzle();
-            console.log(solver.solve(puzzle));
+            solver.solve(puzzle);
         }
 
         window.onload = function () {
             table = tableCreate();
+            solver = new Sudoku(table);
         }
-        
+
     </script>
     <title>Sudoku Solver</title>
 </head>
 <body>
-<div>
-    <table id="sudoku_grid">
+<div id="sudoku_container">
 
-    </table>
 </div>
 <div>
     <button onclick="solvePuzzle()">Solve it!</button>
