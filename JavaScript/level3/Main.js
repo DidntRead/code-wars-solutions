@@ -1,5 +1,4 @@
 
-const sudoku = require("./");
+const Sudoku = require("./sudokuSolver");
 
-
-console.log(bySix.isDivisibleBy6("1234567890123456789012345678*0"));
+console.log();

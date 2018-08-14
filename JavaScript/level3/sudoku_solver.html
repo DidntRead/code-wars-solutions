@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../jquery-3.3.1.slim.js"></script>
+    <script src="./sudokuSolver.js"></script>
+    <style>
+
+    </style>
+    <script type="text/javascript">
+
+        let table;
+
+        function tableCreate() {
+            let body = document.body;
+            let table = document.createElement('table');
+
+            table.style.width = '200px';
+            table.style.border = '1px solid black';
+
+            for (let i = 0; i < 9; i++) {
+                let tr = table.insertRow();
+                tr.id = "row" + i;
+                for (let j = 0; j < 9; j++) {
+                    {
+                        let td = tr.insertCell();
+                        td.id = "cell" + i + j;
+
+                        td.appendChild(document.createTextNode('0'));
+                        td.style.border = '1px solid black';
+                        td.addEventListener("click", ()=>{
+                            let current = td.innerText;
+                            if(current < 9) {
+                                current++;
+                            }
+                            else{
+                                current = 0;
+                            }
+                            td.innerText = current;
+                        });
+                    }
+                }
+            }
+            body.appendChild(table);
+            return table;
+        }
+
+        function getPuzzle() {
+            let puzzle = [];
+            for(let i = 0; i < 9; i ++){
+                let row = [];
+                let cells = table.rows.item(i).cells;
+                for(var j = 0; j < 9; j++){
+                    let cellVal = cells.item(j).innerHTML;
+                    row.push(cellVal);
+                }
+                puzzle.push(row);
+            }
+            
+            return puzzle;
+        }
+
+        function solvePuzzle(){
+            let puzzle = getPuzzle();
+        }
+
+        window.onload = function () {
+            let solver = Sudoku();
+            let puzzle = {};
+
+           table = tableCreate();
+
+        }
+    </script>
+    <title>Sudoku Solver</title>
+</head>
+<body>
+<div>
+    <table id="sudoku_grid">
+
+    </table>
+</div>
+<div>
+    <button onclick="solvePuzzle()">Solve it!</button>
+</div>
+</body>
+</html>

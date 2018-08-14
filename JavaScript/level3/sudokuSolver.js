@@ -1,19 +1,18 @@
 /**
  * Created by ashley.morris on 22/05/2018.
  */
-/**
- * Created by ashley.morris on 27/04/2018.
- */
 
-function LevelThree() {
-}
+
+function Sudoku() { }
 
 /**
  * Uses a simple console.log to print the current state of the puzzle
  * @param puzzle
  */
 let printGrid = function (puzzle) {
+
     console.log(puzzle);
+
 };
 
 /**
@@ -93,7 +92,7 @@ let getUnassignedLocation = function (puzzle) {
  * @param puzzle
  * @returns {*}
  */
-LevelThree.prototype.sudoku = function (puzzle) {
+Sudoku.prototype.solve = function (puzzle) {
 
     //if there are no unassigned locations then the puzzle is solved
     if (getUnassignedLocation(puzzle) === false) {
@@ -114,7 +113,7 @@ LevelThree.prototype.sudoku = function (puzzle) {
             puzzle[row][col] = num;
 
             //Do the same thing again recursively
-            if (this.sudoku(puzzle)) {
+            if (this.solve(puzzle)) {
                 return puzzle;
             }
 
@@ -126,5 +125,7 @@ LevelThree.prototype.sudoku = function (puzzle) {
     return false;
 };
 
+try {
+    module.exports =  Sudoku;
+} catch (e) {}
 
-module.exports = LevelThree;

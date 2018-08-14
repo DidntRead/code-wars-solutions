@@ -6,10 +6,10 @@ let test = require('tape');
 let sinon = require('sinon');
 
 let LevelSix = require("../level6/levelSix");
-let LevelThree = require('../level3/level3');
+let Sudoku = require('../level3/sudokuSolver');
 
 let levelSix = new LevelSix();
-let levelThree = new LevelThree();
+
 
 //test('toCamelCase', function (t) {
 //    t.equal(levelSix.toCamelCase(""), "", "handles empty strings" );
@@ -56,6 +56,8 @@ let levelThree = new LevelThree();
 
 test('Sudoku', function(t) {
 
+    let sudoku = new Sudoku();
+
     var puzzle = [
         [5,3,0,0,7,0,0,0,0],
         [6,0,0,1,9,5,0,0,0],
@@ -78,6 +80,6 @@ test('Sudoku', function(t) {
         [2,8,7,4,1,9,6,3,5],
         [3,4,5,2,8,6,1,7,9]];
 
-    t.equal(levelThree.sudoku(puzzle).toString(), solution.toString(), "puzzle solved");
+    t.equal(sudoku.solve(puzzle).toString(), solution.toString(), "puzzle solved");
     t.end();
 });
