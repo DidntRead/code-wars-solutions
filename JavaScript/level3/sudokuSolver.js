@@ -9,7 +9,9 @@ function Sudoku(table) {
 
 /**
  * Uses a simple console.log to print the current state of the puzzle
- * @param puzzle
+ * @param row
+ * @param col
+ * @param num
  */
 Sudoku.prototype.outPutToTable = function (row, col, num) {
     if (this.table) {
@@ -65,8 +67,8 @@ let numberInBox = function (puzzle, startRow, startCol, num) {
 };
 
 /**
- * Checks wheter it is legal to assign num to the given row, col and 3x3 grid
- * @param puzzle the sudoku puzzle to solve
+ * Checks whether it is legal to assign num to the given row, col and 3x3 grid
+ * @param puzzle the Sudoku puzzle to solve
  * @param row the row to check
  * @param col the col to check
  * @param num the number to check for
@@ -78,20 +80,25 @@ let isSafe = function (puzzle, row, col, num) {
         !numberInBox(puzzle, row - row % 3, col - col % 3, num)
 };
 
+
 let getUnassignedLocation = function (puzzle) {
     for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
             if (puzzle[row][col] === 0) {
-                return {row: row, col: col}
+                return {
+                    row: row,
+                    col: col
+                }
             }
         }
     }
     return false;
 };
+
 /**
  * Write a function that will solve a 9x9 Sudoku puzzle.
  * The function will take one argument consisting of the 2D puzzle array, with the value 0 representing an unknown square.
- * The Sudokus tested against your function will be "easy" (i.e. determinable; there will be no need to assume and test possibilities on unknowns)
+ * The Sudoku's tested against your function will be "easy" (i.e. determinable; there will be no need to assume and test possibilities on unknowns)
  * and can be solved with a brute-force approach.
  * @param puzzle
  * @returns {*}
@@ -124,10 +131,7 @@ Sudoku.prototype.solve = function (puzzle) {
             }
 
             puzzle[row][col] = 0;
-
         }
-
-
     }
 
     return false;
@@ -144,6 +148,19 @@ Sudoku.prototype.getDefaultTable = function () {
         [0, 6, 0, 0, 0, 0, 2, 8, 0],
         [0, 0, 0, 4, 1, 9, 0, 0, 5],
         [0, 0, 0, 0, 8, 0, 0, 7, 9]];
+};
+
+Sudoku.prototype.getHardTable = function () {
+    return [
+        [0, 0, 0, 6, 0, 0, 0, 0, 7],
+        [6, 0, 2, 5, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 6, 0, 2],
+        [0, 0, 3, 8, 6, 7, 9, 0, 0],
+        [0, 8, 0, 0, 0, 0, 0, 7, 0],
+        [0, 0, 9, 2, 2, 4, 5, 0, 0],
+        [7, 0, 1, 4, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 9, 3, 0, 8],
+        [3, 0, 0, 0, 0, 5, 0, 0, 0]];
 };
 
 try {
