@@ -5,11 +5,18 @@
     <script src="../jquery-3.3.1.slim.js"></script>
     <script src="./sudokuSolver.js"></script>
     <style>
+        .sudoku-section-one {
+            background: #ccc;
+        }
+        .sudoku-section-two {
+            background: #ffffff;
+        }
 
     </style>
     <script type="text/javascript">
 
         let table;
+        let solver = new Sudoku();
 
         function tableCreate() {
             let body = document.body;
@@ -23,17 +30,27 @@
                 tr.id = "row" + i;
                 for (let j = 0; j < 9; j++) {
                     {
+                        let sectIDi = Math.floor(i / 3);
+                        let sectIDj = Math.floor(j / 3);
+
                         let td = tr.insertCell();
                         td.id = "cell" + i + j;
 
                         td.appendChild(document.createTextNode('0'));
                         td.style.border = '1px solid black';
-                        td.addEventListener("click", ()=>{
+
+                        if ((sectIDi + sectIDj) % 2 === 0) {
+                            td.classList.add('sudoku-section-one');
+                        } else {
+                            td.classList.add('sudoku-section-two');
+                        }
+
+                        td.addEventListener("click", () => {
                             let current = td.innerText;
-                            if(current < 9) {
+                            if (current < 9) {
                                 current++;
                             }
-                            else{
+                            else {
                                 current = 0;
                             }
                             td.innerText = current;
@@ -47,30 +64,27 @@
 
         function getPuzzle() {
             let puzzle = [];
-            for(let i = 0; i < 9; i ++){
+            for (let i = 0; i < 9; i++) {
                 let row = [];
                 let cells = table.rows.item(i).cells;
-                for(var j = 0; j < 9; j++){
+                for (var j = 0; j < 9; j++) {
                     let cellVal = cells.item(j).innerHTML;
                     row.push(cellVal);
                 }
                 puzzle.push(row);
             }
-            
             return puzzle;
         }
 
-        function solvePuzzle(){
+        function solvePuzzle() {
             let puzzle = getPuzzle();
+            console.log(solver.solve(puzzle));
         }
 
         window.onload = function () {
-            let solver = Sudoku();
-            let puzzle = {};
-
-           table = tableCreate();
-
+            table = tableCreate();
         }
+        
     </script>
     <title>Sudoku Solver</title>
 </head>
