@@ -112,10 +112,11 @@ Sudoku.prototype.solve = function (puzzle) {
     for (let num = 1; num <= 9; num++) {
 
         //Check if number is valid for the current unassigned location
+        this.outPutToTable(row, col, num);
+
         if (isSafe(puzzle, row, col, num)) {
 
             puzzle[row][col] = num;
-            this.outPutToTable(row, col, num);
 
             //Do the same thing again recursively
             if (this.solve(puzzle)) {
@@ -123,8 +124,9 @@ Sudoku.prototype.solve = function (puzzle) {
             }
 
             puzzle[row][col] = 0;
-            this.outPutToTable(row, col, 0);
+
         }
+
 
     }
 
