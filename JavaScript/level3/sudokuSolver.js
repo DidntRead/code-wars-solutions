@@ -7,8 +7,9 @@ function Sudoku(table) {
     this.table = table;
 }
 
+
 /**
- * Uses a simple console.log to print the current state of the puzzle
+ *
  * @param row
  * @param col
  * @param num
@@ -126,6 +127,7 @@ Sudoku.prototype.solve = function (puzzle) {
             puzzle[row][col] = num;
 
             //Do the same thing again recursively
+
             if (this.solve(puzzle)) {
                 return puzzle;
             }

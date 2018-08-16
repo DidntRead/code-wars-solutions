@@ -13,6 +13,14 @@
             background: #ffffff;
         }
 
+        .sudoku-cell{
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #a99f9f;
+            padding: 0.5em;
+            min-width: 1em;
+        }
+
     </style>
     <script type="text/javascript">
 
@@ -23,8 +31,9 @@
             let container = document.getElementById("sudoku_container");
             let table = document.createElement('table');
 
-            table.style.width = '200px';
-            table.style.border = '1px solid black';
+            table.style.width = '250px';
+            table.style.border = '1.2px solid black';
+            table.style.borderSpacing = "1px";
 
             for (let i = 0; i < 9; i++) {
                 let tr = table.insertRow();
@@ -38,7 +47,7 @@
                         td.id = "cell" + i + j;
 
                         td.appendChild(document.createTextNode('0'));
-                        td.style.border = '1px solid black';
+                        td.classList.add('sudoku-cell');
 
                         if ((sectIDi + sectIDj) % 2 === 0) {
                             td.classList.add('sudoku-section-one');
@@ -84,7 +93,9 @@
 
         function solvePuzzle() {
             let puzzle = getPuzzle();
-            solver.solve(puzzle);
+            if(!solver.solve(puzzle)){
+                alert("this puzzle is unsolveable")
+            };
         }
 
         window.onload = function () {
