@@ -10,49 +10,48 @@ let Sudoku = require('../level3/sudokuSolver');
 
 let levelSix = new LevelSix();
 
+test('toCamelCase', function (t) {
+   t.equal(levelSix.toCamelCase(""), "", "handles empty strings" );
+   t.equal(levelSix.toCamelCase("the_stealth_warrior"), "theStealthWarrior", "the_stealth_warrior" );
+   t.equal(levelSix.toCamelCase("The-Stealth-Warrior"), "TheStealthWarrior", "the_stealth_warrior" );
+   t.equal(levelSix.toCamelCase("A-B-C"), "ABC", "the_stealth_warrior" );
+   t.end();
+});
 
-//test('toCamelCase', function (t) {
-//    t.equal(levelSix.toCamelCase(""), "", "handles empty strings" );
-//    t.equal(levelSix.toCamelCase("the_stealth_warrior"), "theStealthWarrior", "the_stealth_warrior" );
-//    t.equal(levelSix.toCamelCase("The-Stealth-Warrior"), "TheStealthWarrior", "the_stealth_warrior" );
-//    t.equal(levelSix.toCamelCase("A-B-C"), "ABC", "the_stealth_warrior" );
-//    t.end();
-//});
-//
-//test('alphabetWars', function (t) {
-//    let reinforces =
-//        [   "g964xxxxxxxx",
-//            "myjinxin2015",
-//            "steffenvogel",
-//            "smile67xxxxx",
-//            "giacomosorbi",
-//            "freywarxxxxx",
-//            "bkaesxxxxxxx",
-//            "vadimbxxxxxx",
-//            "zozofouchtra",
-//            "colbydauphxx" ];
-//
-//    let airstrikes =
-//        [   "* *** ** ***",
-//            " ** * * * **",
-//            " * *** * ***",
-//            " **  * * ** ",
-//            "* ** *   ***",
-//            "***   ",
-//            "**",
-//            "*",
-//            "*" ];
-//
-//    t.equals(levelSix.alphabetWar(reinforces, airstrikes), 'codewarsxxxx','Top 50 massacre failure');
-//    t.equals(levelSix.alphabetWar(["abcdefg","hijklmn"], ["   *   ", "*  *   "]),'hi___fg');
-//    t.equals(levelSix.alphabetWar(["aaaaa","bbbbb", "ccccc", "ddddd"],  ["*", " *", "   "]),'ccbaa');
-//    t.end();
-//});
-//
-//test('deleteNth', function (t) {
-//   t.equal(levelSix.deleteNth([20,37,20,21], 1).toString(), [20,37,21].toString(), "passes");
-//   t.end();
-//});
+test('alphabetWars', function (t) {
+   let reinforces =
+       [   "g964xxxxxxxx",
+           "myjinxin2015",
+           "steffenvogel",
+           "smile67xxxxx",
+           "giacomosorbi",
+           "freywarxxxxx",
+           "bkaesxxxxxxx",
+           "vadimbxxxxxx",
+           "zozofouchtra",
+           "colbydauphxx" ];
+
+   let airstrikes =
+       [   "* *** ** ***",
+           " ** * * * **",
+           " * *** * ***",
+           " **  * * ** ",
+           "* ** *   ***",
+           "***   ",
+           "**",
+           "*",
+           "*" ];
+
+   t.equals(levelSix.alphabetWar(reinforces, airstrikes), 'codewarsxxxx','Top 50 massacre failure');
+   t.equals(levelSix.alphabetWar(["abcdefg","hijklmn"], ["   *   ", "*  *   "]),'hi___fg');
+   t.equals(levelSix.alphabetWar(["aaaaa","bbbbb", "ccccc", "ddddd"],  ["*", " *", "   "]),'ccbaa');
+   t.end();
+});
+
+test('deleteNth', function (t) {
+  t.equal(levelSix.deleteNth([20,37,20,21], 1).toString(), [20,37,21].toString(), "passes");
+  t.end();
+});
 
 test('Sudoku', function(t) {
 
@@ -81,4 +80,8 @@ test('Sudoku', function(t) {
 
     t.equal(sudoku.solve(puzzle).toString(), solution.toString(), "puzzle solved");
     t.end();
+});
+
+test('number2words', function(t) {
+
 });

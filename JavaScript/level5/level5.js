@@ -88,4 +88,41 @@ LevelFive.prototype.add = function (x, y) {
     return x;
 };
 
+LevelFive.prototype.number2words = function (n){  
+    
+    const ones =    ['zero', 'one', 'two', 'three', 'four', 
+                    'five', ' six', 'seven', 'eight', 'nine',
+                    'ten', 'eleven', 'tweleve', 'thirteen', 
+                    'fourteen', 'fifteen', 'sixteen', 
+                    'seventeen', 'eighteen', 'nineteen'];
+
+    const tens  =    { 2: 'twenty', 3: 'thirty', 4: 'forty', 5: 'fifty', 
+                       6: 'sixty', 7: 'seventy',  8: ' eighty', 9: 'ninety'}
+
+    let words = '';
+    let nums = Array.from(n.toString()).map(Number);
+    let digits = nums.length;
+    
+    for(let i = 0; i < digits; i ++){
+        //Deal with values 19 or less
+        if(n <= 9){
+            words += ones[n]
+        }
+        else if (n > 9 && n <= 19 && i == 1){
+            words += ones[n]   
+        }   
+        //Deal with values 20 or more    
+        else if (n > 19) {
+            if(nums[i] != 0){
+                words += tens[nums[i]]
+            }
+        }
+    }
+
+    console.log(words);
+    
+    return words;
+}
+
+
 module.exports = LevelFive;
