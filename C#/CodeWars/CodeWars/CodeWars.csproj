@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlphabetPosition.cs" />
     <Compile Include="CodeWarsUtilities.cs" />
+    <Compile Include="IqTest.cs" />
+    <Compile Include="PigIt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
